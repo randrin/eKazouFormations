@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +27,12 @@ public class Cours implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(length = 25)
 	private String name;
+	@Column(length = 100)
 	private String description;
 	private double duration;
+	@Column(length = 100)
 	private String professor;
 	private String imagePath;
 	private Date initClasse;
