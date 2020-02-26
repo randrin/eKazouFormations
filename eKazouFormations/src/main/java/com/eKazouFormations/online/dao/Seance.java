@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,5 +39,6 @@ public class Seance implements Serializable {
 	@ManyToOne
 	private Cours cours;
 	@OneToMany(mappedBy = "seance")
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Collection<Reservation> reservations;
 }

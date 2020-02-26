@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,6 +38,7 @@ public class Formation implements Serializable {
 	private double altitude;
 	private int numberSalle;
 	@OneToMany(mappedBy = "formation")
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Collection<Salle> salles;
 	@ManyToOne
 	private Ville ville;

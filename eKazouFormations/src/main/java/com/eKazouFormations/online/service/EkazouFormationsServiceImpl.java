@@ -79,12 +79,12 @@ public class EkazouFormationsServiceImpl implements EkazouFormationsService{
 	public void initCours() {
 		double [] duration =  {1.00, 1.30, 2.00, 2.30, 3.00, 3.30};
 		List<Categorie> listCategories = categorieRepository.findAll();
-		Stream.of("Angular", "ReactJS", "VueJS", "Java/J2ee", "Spring Boot", "NodeJs", "Aws", "Oracle SQL", "SalesForce", "SAP Hybris")
+		Stream.of("Angular", "ReactJS", "VueJS", "Java-J2ee", "Spring Boot", "NodeJs", "Aws", "Oracle SQL", "SalesForce", "SAP Hybris")
 		.forEach(crs -> {
 			Cours cours = new Cours();
 			cours.setName(crs);
 			cours.setDuration(duration[new Random().nextInt(duration.length)]);
-			cours.setImagePath(crs.replaceAll(" ", ""));
+			cours.setImagePath(crs.replaceAll(" ", "")+".jpg");
 			cours.setCategorie(listCategories.get(new Random().nextInt(listCategories.size())));
 			coursRepository.save(cours);
 		});
