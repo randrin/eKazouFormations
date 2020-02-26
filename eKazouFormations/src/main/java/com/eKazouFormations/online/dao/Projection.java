@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,26 +19,21 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cours implements Serializable {
+public class Projection implements Serializable {
 
-	private static final long serialVersionUID = 2130829244144705121L;
-
+	private static final long serialVersionUID = 536533415232468969L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(length = 25)
-	private String name;
-	@Column(length = 100)
-	private String description;
-	private double duration;
-	@Column(length = 100)
-	private String professor;
-	private String imagePath;
-	private Date initClasse;
-	@OneToMany(mappedBy = "cours")
-	private Collection<Seance> seances;
+	private Date dateProjection;
+	private double prix;
 	@ManyToOne
-	private Categorie categorie;
-	@OneToMany(mappedBy = "cours")
-	private Collection<Projection> projections;
+	private Salle salle;
+	@ManyToOne
+	private Cours cours;
+	@OneToMany(mappedBy = "projection")
+	private Collection<Reservation> reservations;
+	@ManyToOne
+	private Seance seance;
 }

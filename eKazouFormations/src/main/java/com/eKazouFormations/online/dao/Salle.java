@@ -37,4 +37,6 @@ public class Salle implements Serializable {
 	private Collection<Seance> seances;
 	@ManyToOne
 	private Formation formation;
+	@OneToMany(mappedBy = "salle")
+	private Collection<Projection> projections;
 }

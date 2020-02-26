@@ -28,7 +28,7 @@ public class Place implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 10)
-	private String numero;
+	private int numero;
 	private double longitude;
 	private double latitude;
 	private double altitude;

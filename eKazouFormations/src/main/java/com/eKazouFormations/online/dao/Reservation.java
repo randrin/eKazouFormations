@@ -27,10 +27,11 @@ public class Reservation implements Serializable {
 	@Column(length = 75)
 	private String nameUser;
 	private double prix;
-	@Column(unique = true)
 	private int codePayment;
 	private boolean isReserved;
 	@ManyToOne
 	private Place place;
 	private Seance seance;
+	@ManyToOne
+	private Projection projection;
 }
