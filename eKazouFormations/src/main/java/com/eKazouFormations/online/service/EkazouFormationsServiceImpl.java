@@ -160,7 +160,7 @@ public class EkazouFormationsServiceImpl implements EkazouFormationsService{
 
 	@Override
 	public void initVilles() {
-		Stream.of("Bonapriso-Douala", "Bonadjo-Douala", "Akwa-Douala", "Ngousso-Yaoundé", "Cité Verte-Yaoundé").forEach(ville -> {
+		Stream.of("Bonapriso - Douala", "Bonadjo - Douala", "Akwa - Douala", "Ngousso - Yaoundé", "Cité Verte - Yaoundé").forEach(ville -> {
 			Ville v = new Ville();
 			v.setName(ville);
 			villerepository.save(v);
