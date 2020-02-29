@@ -160,12 +160,20 @@ public class EkazouFormationsServiceImpl implements EkazouFormationsService{
 
 	@Override
 	public void initVilles() {
-		Stream.of("Bonapriso - Douala", "Bonadjo - Douala", "Akwa - Douala", "Ngousso - Yaoundé", "Cité Verte - Yaoundé").forEach(ville -> {
+		String[][] villes = {
+		                     {"Bonapriso - Douala", "https://r-cf.bstatic.com/images/hotel/max500/166/166045620.jpg"},
+		                     {"Akwa - Douala", "https://photos.wikimapia.org/p/00/04/68/95/75_full.jpg"},
+		                     {"Bonadjo - Douala", "https://www.journalducameroun.com/en/wp-content/uploads/2019/12/bonanjo-780x440.jpg"},
+		                     {"Ngousso - Yaoundé", "https://agence.complexesantalucia.com/wp-content/uploads/sites/15/2017/01/ngousso.png"},
+		                     {"Cité Verte - Yaoundé", "https://sic.cm/images/Features/gallery-etetak-01.jpg"}
+							};
+		for (int ville = 0; ville < villes.length; ville++) {	
+			String[] villeSelected = villes[ville];
 			Ville v = new Ville();
-			v.setName(ville);
+			v.setName(villeSelected[0]);
+			v.setImageVille(villeSelected[1]);
 			villerepository.save(v);
-		});
-		
+		}
 	}
 
 	@Override

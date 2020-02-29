@@ -27,6 +27,7 @@ public class Ville implements Serializable {
 	private Long id;
 	@Column(length = 50)
 	private String name;
+	private String imageVille;
 	private double longitude;
 	private double latitude;
 	private double altitude;
