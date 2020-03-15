@@ -4,10 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.eKazouFormations.online.dao.Projection;
+import com.eKazouFormations.online.dao.ProjectionCours;
 
 @RepositoryRestResource
 @CrossOrigin("*")
-public interface ProjectionRepository extends JpaRepository<Projection, Long> {
+public interface ProjectionCoursRepository extends JpaRepository<ProjectionCours, Long> {
 
 }

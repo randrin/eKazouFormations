@@ -37,5 +37,5 @@ public class Reservation implements Serializable {
 	private Seance seance;
 	@ManyToOne
 	@JsonProperty(access = Access.WRITE_ONLY)
-	private Projection projection;
+	private ProjectionCours projection;
 }

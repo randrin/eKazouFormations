@@ -42,5 +42,5 @@ public class Salle implements Serializable {
 	private Formation formation;
 	@OneToMany(mappedBy = "salle")
 	@JsonProperty(access = Access.WRITE_ONLY)
-	private Collection<Projection> projections;
+	private Collection<ProjectionCours> projections;
 }

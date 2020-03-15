@@ -18,7 +18,7 @@ import com.eKazouFormations.online.dao.Categorie;
 import com.eKazouFormations.online.dao.Cours;
 import com.eKazouFormations.online.dao.Formation;
 import com.eKazouFormations.online.dao.Place;
-import com.eKazouFormations.online.dao.Projection;
+import com.eKazouFormations.online.dao.ProjectionCours;
 import com.eKazouFormations.online.dao.Reservation;
 import com.eKazouFormations.online.dao.Salle;
 import com.eKazouFormations.online.dao.Seance;
@@ -27,7 +27,7 @@ import com.eKazouFormations.online.repository.CategorieRepository;
 import com.eKazouFormations.online.repository.CoursRepository;
 import com.eKazouFormations.online.repository.FormationRepository;
 import com.eKazouFormations.online.repository.PlaceRepository;
-import com.eKazouFormations.online.repository.ProjectionRepository;
+import com.eKazouFormations.online.repository.ProjectionCoursRepository;
 import com.eKazouFormations.online.repository.ReservationRepository;
 import com.eKazouFormations.online.repository.SalleRepository;
 import com.eKazouFormations.online.repository.SeanceRepository;
@@ -63,7 +63,7 @@ public class EkazouFormationsServiceImpl implements EkazouFormationsService{
 	private VilleRepository villerepository;
 	
 	@Autowired
-	private ProjectionRepository projectionRepository;
+	private ProjectionCoursRepository projectionCoursRepository;
 	
 	@Override
 	public void initCategories() {
@@ -93,11 +93,21 @@ public class EkazouFormationsServiceImpl implements EkazouFormationsService{
 
 	@Override
 	public void initFormations() {
+		String[][] formations = {
+				{"Web Developpement", "tim-icons icon-components"},
+				{"DataBase Management", "fa fa-database"},
+				{"RH & Gestion", "tim-icons icon-single-copy-04"},
+				{"Système Rèseaux", "tim-icons icon-settings-gear-63"},
+				{"Marketing Comunication", "tim-icons icon-chart-bar-32"},
+				{"Gestion Projet", "fa fa-users"},
+				{"Business Management", "fa fa-handshake"}
+		};
 		villerepository.findAll().forEach(ville -> {
-			Stream.of("Web Developpement", "DataBase Management", "RH & Gestion", "Système Rèseaux", "Marketing Comunication", "Gestion Projet", "Business Management")
+			Stream.of(formations)
 			.forEach(formation -> {
 				Formation fr = new Formation();
-				fr.setName(formation);
+				fr.setName(formation[0]);
+				fr.setIconFormation(formation[1]);
 				fr.setNumberSalle(3 + (int)(Math.random()*7));
 				fr.setVille(ville);
 				formationRepository.save(fr);
@@ -119,7 +129,7 @@ public class EkazouFormationsServiceImpl implements EkazouFormationsService{
 
 	@Override
 	public void initReservations() {
-		projectionRepository.findAll().forEach(projection -> {
+		projectionCoursRepository.findAll().forEach(projection -> {
 			projection.getSalle().getPlaces().forEach(place -> {
 				Reservation reservation = new Reservation();
 				reservation.setPlace(place);
@@ -179,19 +189,20 @@ public class EkazouFormationsServiceImpl implements EkazouFormationsService{
 	@Override
 	public void initProjections() {
 		double [] prix = {30.000, 45.000, 55.000, 80.000, 100.000};
+		List<Cours> listCours = coursRepository.findAll();
 		villerepository.findAll().forEach(ville -> {
 			ville.getFormations().forEach(formation -> {
 				formation.getSalles().forEach(salle -> {
-					coursRepository.findAll().forEach(cours -> {
-						seanceRepository.findAll().forEach(seance -> {
-							Projection projection = new Projection();
-							projection.setDateProjection(new Date());
-							projection.setCours(cours);
-							projection.setSalle(salle);
-							projection.setPrix(prix[new Random().nextInt(prix.length)]);
-							projection.setSeance(seance);
-							projectionRepository.save(projection);
-						});
+					int index = new Random().nextInt(listCours.size());
+					Cours cours = listCours.get(index);
+					seanceRepository.findAll().forEach(seance -> {
+						ProjectionCours projection = new ProjectionCours();
+						projection.setDateProjection(new Date());
+						projection.setCours(cours);
+						projection.setSalle(salle);
+						projection.setPrix(prix[new Random().nextInt(prix.length)]);
+						projection.setSeance(seance);
+						projectionCoursRepository.save(projection);
 					});
 				});
 			});

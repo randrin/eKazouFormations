@@ -45,5 +45,5 @@ public class Cours implements Serializable {
 	private Categorie categorie;
 	@OneToMany(mappedBy = "cours")
 	@JsonProperty(access = Access.WRITE_ONLY)
-	private Collection<Projection> projections;
+	private Collection<ProjectionCours> projections;
 }

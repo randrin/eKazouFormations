@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Projection implements Serializable {
+public class ProjectionCours implements Serializable {
 
 	private static final long serialVersionUID = 536533415232468969L;
 	
