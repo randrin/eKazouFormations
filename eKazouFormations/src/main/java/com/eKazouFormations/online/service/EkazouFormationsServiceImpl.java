@@ -77,14 +77,35 @@ public class EkazouFormationsServiceImpl implements EkazouFormationsService{
 
 	@Override
 	public void initCours() {
+		String[][] coursList = {
+				{"Angular", "Front End Web Application Angular"},
+				{"ReactJS", "Front End JavaScript ReactJS"},
+				{"Java-J2ee", "Back End Application Java-J2ee"},
+				{"Spring Boot", "Back End Framework Applications Spring Boot"},
+				{"NodeJs", "Back End Serveur pour Front End Applications"},
+				{"Aws", "Awesome Cloud pour applications"},
+				{"Oracle SQL", "Stockage des données pour applicarions"},
+				{"SalesForce", "Développement des Applications sur le Cloud Web"},
+				{"SAP Hybris", "Développement pour les applications e-Commerce"}
+		};
+		String[][] professors = {
+				{"Randrin Nzeukang", "https://kazoucoin.com/assets/img/avatars/user/1554246047.jpeg"},
+				{"Boclair Temgoua", "https://kazoucoin.com/assets/img/avatars/user/1556213392.jpeg"},
+				{"Darry Noubissi", "https://kazoucoin.com//assets/img/avatars/user/261b7af5e26acbcad82ec906cf713ba8a04e07de.jpeg"}
+		};
 		double [] duration =  {1.00, 1.30, 2.00, 2.30, 3.00, 3.30};
 		List<Categorie> listCategories = categorieRepository.findAll();
-		Stream.of("Angular", "ReactJS", "VueJS", "Java-J2ee", "Spring Boot", "NodeJs", "Aws", "Oracle SQL", "SalesForce", "SAP Hybris")
+		Stream.of(coursList)
 		.forEach(crs -> {
 			Cours cours = new Cours();
-			cours.setName(crs);
+			cours.setName(crs[0]);
+			cours.setDescription(crs[1]);
+			cours.setProfessor("Randrin Nzeukang");
+			cours.setProfessorImage("https://kazoucoin.com/assets/img/avatars/user/1554246047.jpeg");
+			//cours.setProfessor(professors[0][new Random().nextInt(professors.length)]);
+			//cours.setProfessorImage(professors[0][new Random().nextInt(professors.length)]);
 			cours.setDuration(duration[new Random().nextInt(duration.length)]);
-			cours.setImagePath(crs.replaceAll(" ", "")+".jpg");
+			cours.setImagePath(crs[0].replaceAll(" ", "")+".jpg");
 			cours.setCategorie(listCategories.get(new Random().nextInt(listCategories.size())));
 			coursRepository.save(cours);
 		});
@@ -157,7 +178,7 @@ public class EkazouFormationsServiceImpl implements EkazouFormationsService{
 	@Override
 	public void initSeances() {
 		DateFormat dtf = new SimpleDateFormat("HH:mm");
-		Stream.of("09:00", "13;00", "15:00", "18:00", "21:00").forEach(sea -> {
+		Stream.of("09:00", "13:00", "15:00", "18:00", "21:00").forEach(sea -> {
 			Seance seance = new Seance();
 			try {
 				seance.setDateSeance(dtf.parse(sea));

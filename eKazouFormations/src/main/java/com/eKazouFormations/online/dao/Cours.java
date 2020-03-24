@@ -37,6 +37,7 @@ public class Cours implements Serializable {
 	private double duration;
 	@Column(length = 100)
 	private String professor;
+	private String professorImage;
 	private String imagePath;
 	private Date initClasse;
 	@OneToMany(mappedBy = "cours")
